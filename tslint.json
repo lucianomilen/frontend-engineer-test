@@ -5,6 +5,18 @@
       "config/**/*.js",
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js"
-    ]
+    ],
+    "rules": {
+      "object-literal-sort-keys": false,
+      "interface-name": false,
+      "member-access": [true, "no-public"],
+      "ordered-imports": false
+    }
+  },
+  "rules": {
+    "object-literal-sort-keys": false,
+    "interface-name": false,
+    "ordered-imports": false,
+    "jsx-no-lambda": false
   }
 }
