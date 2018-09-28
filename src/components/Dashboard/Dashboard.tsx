@@ -4,6 +4,7 @@ import {inject, observer} from 'mobx-react';
 import './Dashboard.scss'
 import {Route} from "react-router";
 import StockList from "../Stock/StockList";
+import StockDetail from "../Stock/StockDetail";
 
 @inject('routing')
 @observer
@@ -13,6 +14,7 @@ export default class Dashboard extends React.Component<any,any>{
             <div className={'dashboard'}>
                 <Searchbar/>
                 <Route path='/' component={StockList}/>
+                <Route path='/detail/id' component={StockDetail} routing={this.props.routing}/>
             </div>
         )
     }
