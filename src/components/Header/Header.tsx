@@ -1,10 +1,18 @@
 import * as React from 'react';
 import './Header.scss';
+import {inject} from "mobx-react";
 
-export default class Header extends React.Component {
+@inject('routing')
+export default class Header extends React.Component<any> {
+    public routing: any;
+    constructor(props: any) {
+        super(props);
+    }
+
+
     public render(){
         return (
-            <div className={'header'}>
+            <div onClick={() => this.props.routing.replace('/')} className={'header'}>
                 IEX Dashboard
             </div>
         )

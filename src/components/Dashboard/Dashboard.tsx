@@ -12,9 +12,11 @@ export default class Dashboard extends React.Component<any,any>{
     public render(){
         return (
             <div className={'dashboard'}>
+                <p>{this.props.routing.location.pathname}</p>
+
                 <Searchbar/>
-                <Route path='/' component={StockList}/>
-                <Route path='/detail/id' component={StockDetail} routing={this.props.routing}/>
+                <Route exact={true} path='/' component={StockList}/>
+                <Route path='/detail/:id' component={StockDetail} routing={this.props.routing}/>
             </div>
         )
     }

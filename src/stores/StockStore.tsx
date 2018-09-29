@@ -7,17 +7,32 @@ export default class StockStore {
     }
 
     @observable public stockList: any = [];
-    @observable public dataReady = false;
+    @observable public currentStock: any = {};
+    @observable public stockListDataReady = false;
+    @observable public stockInfoDataReady = false;
 
     public getTOPS () {
         axios.get('https://api.iextrading.com/1.0/stock/market/list/infocus?filter=symbol,iexBidPrice').then(
             response => {
                 this.setStockList(response.data);
-                this.dataReady = true;
             })
     }
 
     @action private setStockList(stockList:any) {
         this.stockList = toJS([...stockList]);
+        this.stockListDataReady = true;
+    }
+
+    @action private setCurrentStock(stock:any) {
+        this.currentStock = stock;
+        this.stockInfoDataReady = true;
+
+    }
+
+    public getStockInfo(symbol: string) {
+        axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/quote`).then(
+            response => {
+                this.setCurrentStock(response.data);
+            })
     }
 }

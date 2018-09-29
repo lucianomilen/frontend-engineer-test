@@ -42,16 +42,15 @@ export default class StockList extends React.Component<any> {
                 onClick: () => {
                     console.log(rowInfo.original)
                     // console.log(this.props)
-                    this.props.routing.replace(`/detail/${rowInfo.original.symbol}`)
+                    this.props.routing.push(`/detail/${rowInfo.original.symbol}`)
                 }
             }
         }
 
         return (
             <div >
-                <p>{this.props.routing.location.pathname}</p>
                 {
-                    this.stockStore.dataReady &&
+                    this.stockStore.stockListDataReady &&
                         <div >
                             <ReactTable
                                 filterable={true}
