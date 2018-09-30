@@ -8,13 +8,21 @@ export default class StockStore {
 
     @observable public stockList: any = [];
     @observable public currentStock: any = {};
+
     @observable public stockListDataReady = false;
+    @observable public stockListDataError = false;
+
     @observable public stockInfoDataReady = false;
+    @observable public stockInfoDataError = false;
 
     public getTOPS () {
-        axios.get('https://api.iextrading.com/1.0/stock/market/list/infocus?filter=symbol,iexBidPrice').then(
+        axios.get('https://api.iextrading.com/1.0/stock/market/list/infocus?filter=symbol,latestPrice').then(
             response => {
                 this.setStockList(response.data);
+            },
+            error => {
+                this.stockListDataError = true;
+                console.error(error);
             })
     }
 
@@ -33,6 +41,11 @@ export default class StockStore {
         axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/quote`).then(
             response => {
                 this.setCurrentStock(response.data);
+            },
+            error => {
+                this.stockInfoDataError = true;
+                console.error(error);
+
             })
     }
 }

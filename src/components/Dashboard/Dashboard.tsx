@@ -1,23 +1,37 @@
 import * as React from 'react';
-import Searchbar from "../Searchbar/Searchbar";
-import {inject, observer} from 'mobx-react';
+import {inject, observer, Provider} from 'mobx-react';
 import './Dashboard.scss'
 import {Route} from "react-router";
 import StockList from "../Stock/StockList";
 import StockDetail from "../Stock/StockDetail";
 
+@inject('StockStore')
 @inject('routing')
 @observer
-export default class Dashboard extends React.Component<any,any>{
-    public render(){
-        return (
-            <div className={'dashboard'}>
-                <p>{this.props.routing.location.pathname}</p>
+export default class Dashboard extends React.Component<any, any> {
 
-                <Searchbar/>
-                <Route exact={true} path='/' component={StockList}/>
-                <Route path='/detail/:id' component={StockDetail} routing={this.props.routing}/>
+    constructor(props: any) {
+        super(props);
+    }
+
+    public render() {
+        const hide = {
+            display: 'none'
+        }
+        return (
+            <div>
+                <p style={hide}>
+                    {this.props.routing.location.pathname}
+                </p>
+
+                <Provider {...this.props.StockStore}>
+                    <div className={'dashboard'}>
+                        <Route exact={true} path='/' component={StockList} routing={this.props.routing}/>
+                        <Route path='/detail/:id' component={StockDetail}/>
+                    </div>
+                </Provider>
             </div>
+
         )
     }
 }

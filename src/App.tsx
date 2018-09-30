@@ -6,14 +6,15 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import {Provider} from 'mobx-react';
 import {RouterStore, syncHistoryWithStore} from 'mobx-react-router';
 import {Router} from 'react-router';
+import StockStore from "./stores/StockStore";
 
 const browserHistory = createBrowserHistory();
 const routingStore = new RouterStore();
+const stockStore = new StockStore();
 
 const stores = {
-    // Key can be whatever you want
     routing: routingStore,
-    // ...other stores
+    StockStore: stockStore
 };
 
 const history = syncHistoryWithStore(browserHistory, routingStore);
