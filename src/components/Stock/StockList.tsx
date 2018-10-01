@@ -41,14 +41,13 @@ export default class StockList extends React.Component<any, any> {
             },
         ];
 
-        // @ts-ignore
-        const onRowClick = (state, rowInfo, column, instance) => {
+        const onRowClick = (state: any, rowInfo: any, column: any, instance: any) => {
             return {
                 onClick: () => {
                     this.props.routing.push(`/detail/${rowInfo.original.symbol}`)
                 }
             }
-        }
+        };
 
         return (
             <div className={'table'}>
@@ -58,7 +57,7 @@ export default class StockList extends React.Component<any, any> {
                             <ReactTable
                                 filterable={true}
                                 getTrProps={onRowClick}
-                                defaultPageSize={10}
+                                defaultPageSize={20}
                                 data={toJS(this.props.StockStore.stockList)}
                                 columns={columns}
                             />

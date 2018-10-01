@@ -2,16 +2,27 @@ import * as React from 'react';
 import {inject, observer} from 'mobx-react';
 import './Stock.scss'
 
+
 @inject('StockStore')
 @observer
 export default class StockDetail extends React.Component<any> {
 
     private stockID: string;
+    private LineChart: any;
+    private chartOptions: any;
 
     constructor(props: any) {
         super(props);
+
         this.stockID = props.match.params.id;
         props.StockStore.getStockInfo(this.stockID);
+        props.StockStore.getStockChart(this.stockID);
+        // props.StockStore.initSocketConnection(this.stockID.toLowerCase());
+
+        this.LineChart = require("react-chartjs").Line;
+        this.chartOptions = {
+            responsive: true,
+        }
     }
 
     public render() {
@@ -74,17 +85,20 @@ export default class StockDetail extends React.Component<any> {
                                 {currentStock.marketCap}
                             </p>
                             <p>
-                                <label >
+                                <label>
                                     Week 52 Range
                                 </label>
                                 {currentStock.week52High} - {currentStock.week52Low}
                             </p>
                         </div>
-                        <div className={"stock-info-graph-container"}>
+                        {this.props.StockStore.stockChartDataReady &&
+                        <div className="stock-info-graph-container">
                             <p>
-                                Graph
+                                Current Month Price
                             </p>
+                            <this.LineChart data={this.props.StockStore.getStockChartData()} options={this.chartOptions}/>
                         </div>
+                        }
                     </div>
                 }
                 {
@@ -98,4 +112,9 @@ export default class StockDetail extends React.Component<any> {
 
         )
     }
+
+    // public componentWillUnmount() {
+    //     this.props.StockStore.closeSocketConnection(this.stockID.toLowerCase());
+    // }
+
 }

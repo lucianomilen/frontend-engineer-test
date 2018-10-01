@@ -15,9 +15,11 @@ export default class Dashboard extends React.Component<any, any> {
     }
 
     public render() {
-        const hide = {
+
+        const hide = { // o elemento fantasma que usa este estilo foi misteriosamente necessário para o router funcionar
             display: 'none'
-        }
+        };
+
         return (
             <div>
                 <p style={hide}>

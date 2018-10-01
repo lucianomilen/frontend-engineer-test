@@ -39,6 +39,12 @@ label {
   color: indianred;
 }
 
+.stock-info-graph-container{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .stock-info-content {
     grid-template-rows: 1fr 3fr 4fr;

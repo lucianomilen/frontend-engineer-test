@@ -7,6 +7,7 @@ import {Provider} from 'mobx-react';
 import {RouterStore, syncHistoryWithStore} from 'mobx-react-router';
 import {Router} from 'react-router';
 import StockStore from "./stores/StockStore";
+import Footer from "./components/Footer/Footer";
 
 const browserHistory = createBrowserHistory();
 const routingStore = new RouterStore();
@@ -27,6 +28,7 @@ class App extends React.Component {
                     <div className="App">
                         <Header/>
                         <Dashboard />
+                        <Footer/>
                     </div>
                 </Router>
             </Provider>
