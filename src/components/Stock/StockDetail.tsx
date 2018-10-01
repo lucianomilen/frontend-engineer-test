@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {inject, observer} from 'mobx-react';
+import './Stock.scss'
 
 @inject('StockStore')
 @observer
@@ -9,65 +10,87 @@ export default class StockDetail extends React.Component<any> {
 
     constructor(props: any) {
         super(props);
-        console.log(props)
         this.stockID = props.match.params.id;
         props.StockStore.getStockInfo(this.stockID);
     }
 
     public render() {
+        const {currentStock} = this.props.StockStore;
+
+        const negativeText = {
+            color: 'red'
+        };
+        const normalText = {
+            color: 'green'
+        };
+
         return (
-            <div>
+            <div className="stock-info-container">
                 {
                     this.props.StockStore.stockInfoDataReady &&
-                    <div>
-                        <p>
-                            Symbol: {this.props.StockStore.currentStock.symbol}
-                        </p>
-                        <p>
-                            Company: {this.props.StockStore.currentStock.companyName}
-                        </p>
-                        <p>
-                            Primary Exchange: {this.props.StockStore.currentStock.primaryExchange}
-                        </p>
-                        <p>
-                            Sector: {this.props.StockStore.currentStock.sector}
-                        </p>
-                        <p>
-                            High: {this.props.StockStore.currentStock.high}
-                        </p>
-                        <p>
-                            Low: {this.props.StockStore.currentStock.low}
-                        </p>
-                        <p>
-                            Latest Price: {this.props.StockStore.currentStock.latestPrice}
-                        </p>
-                        <p>
-                            Change: {this.props.StockStore.currentStock.change}
-                        </p>
-                        <p>
-                            IEX Volume: {this.props.StockStore.currentStock.iexVolume}
-                        </p>
-                        <p>
-                            IEX Bid Price: {this.props.StockStore.currentStock.iexBidPrice}
-                        </p>
-                        <p>
-                            IEX Ask Price: {this.props.StockStore.currentStock.iexAskPrice}
-                        </p>
-                        <p>
-                            Market Cap: {this.props.StockStore.currentStock.marketCap}
-                        </p>
-                        <p>
-                            Week 52 High: {this.props.StockStore.currentStock.week52High}
-                        </p>
-                        <p>
-                            Week 52 Low: {this.props.StockStore.currentStock.week52Low}
-                        </p>
+                    <div className="stock-info-content">
+                        <div className="stock-info-header">
+                            <h4>
+                                {currentStock.companyName} ({currentStock.symbol})
+                            </h4>
+                            <h1>
+                                {currentStock.latestPrice}&nbsp;
+                                <span className="stock-change-text"
+                                      style={currentStock.change < 0 ? negativeText : normalText}>
+                                    {currentStock.change}
+                                    ({(currentStock.changePercent * 100).toFixed(3)}%)
+                                    </span>
+                            </h1>
+                        </div>
+                        <div className={"stock-info-list"}>
+                            <p>
+                                <label>
+                                    Latest Time
+                                </label>
+                                {currentStock.latestTime}
+                            </p>
+                            <p>
+                                <label>
+                                    Volume
+                                </label>
+                                {currentStock.latestVolume}
+                            </p>
+                            <p>
+                                <label>
+                                    Open
+                                </label>
+                                {currentStock.open}
+                            </p>
+                            <p>
+                                <label>
+                                    Sector
+                                </label>
+                                {currentStock.sector}
+                            </p>
+                            <p>
+                                <label>
+                                    Market Cap
+                                </label>
+                                {currentStock.marketCap}
+                            </p>
+                            <p>
+                                <label >
+                                    Week 52 Range
+                                </label>
+                                {currentStock.week52High} - {currentStock.week52Low}
+                            </p>
+                        </div>
+                        <div className={"stock-info-graph-container"}>
+                            <p>
+                                Graph
+                            </p>
+                        </div>
                     </div>
                 }
                 {
                     this.props.StockStore.stockInfoDataError &&
                     <div>
-                        <p>Error.</p>
+                        <p>An error has occurred. Please try again later.</p>
                     </div>
 
                 }

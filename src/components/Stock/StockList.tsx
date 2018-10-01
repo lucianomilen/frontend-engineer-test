@@ -3,7 +3,7 @@ import {inject, observer} from "mobx-react";
 import ReactTable from "react-table";
 import {toJS} from "mobx";
 import 'react-table/react-table.css'
-import './StockList.scss'
+import './Stock.scss'
 import StockStore from "../../stores/StockStore";
 
 @inject('StockStore')
@@ -51,7 +51,7 @@ export default class StockList extends React.Component<any, any> {
         }
 
         return (
-            <div>
+            <div className={'table'}>
                 {
                     this.props.StockStore.stockListDataReady &&
                         <div >
@@ -67,7 +67,7 @@ export default class StockList extends React.Component<any, any> {
                 {
                     this.props.StockStore.stockListDataError &&
                         <div>
-                            <p>Error.</p>
+                            <p>An error has occurred. Please try again later.</p>
                         </div>
                 }
             </div>

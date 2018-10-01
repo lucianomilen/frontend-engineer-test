@@ -22,7 +22,6 @@ export default class StockStore {
             },
             error => {
                 this.stockListDataError = true;
-                console.error(error);
             })
     }
 
@@ -33,6 +32,7 @@ export default class StockStore {
 
     @action private setCurrentStock(stock:any) {
         this.currentStock = stock;
+        console.log(stock)
         this.stockInfoDataReady = true;
 
     }
@@ -44,8 +44,6 @@ export default class StockStore {
             },
             error => {
                 this.stockInfoDataError = true;
-                console.error(error);
-
             })
     }
 }
