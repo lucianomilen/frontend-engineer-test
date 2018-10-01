@@ -4,17 +4,14 @@ import ReactTable from "react-table";
 import {toJS} from "mobx";
 import 'react-table/react-table.css'
 import './Stock.scss'
-import StockStore from "../../stores/StockStore";
 
 @inject('StockStore')
 @inject('routing')
 @observer
 export default class StockList extends React.Component<any, any> {
     public routing: any;
-    public stockStore: any;
     constructor(props: any) {
         super(props);
-        this.stockStore = new StockStore()
     }
 
     public render() {
