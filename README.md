@@ -8,6 +8,16 @@ Tarefas cumpridas:
 * Webpack
 * Socket (parcial)
 
+Como rodar o projeto:
+
+`npm install`
+
+`yarn run start`
+
+Como fazer build do projeto:
+
+`yarn build`
+
 A falta de dados no final de semana (acredito que seja devido ao mercado estar fechado) dificultou o desenvolvimento,
 já que os testes ficaram prejudicados.
 
