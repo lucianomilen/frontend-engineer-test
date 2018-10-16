@@ -28,7 +28,7 @@ export default class StockList extends React.Component<any, any> {
             },
             {
                 Header: "Price",
-                accessor: 'latestPrice',
+                accessor: 'lastSalePrice',
                 Filter: ({ filter, onChange }: any) =>
                     <input
                         onChange={event => onChange(event.target.value)}

@@ -38,7 +38,7 @@ export default class StockStore {
     // }
 
     public getTOPS() {
-        axios.get('https://api.iextrading.com/1.0/tops?filter=symbol,latestPrice').then(
+        axios.get('https://api.iextrading.com/1.0/tops?filter=symbol,lastSalePrice').then(
             response => {
                 this.setStockList(response.data);
             },

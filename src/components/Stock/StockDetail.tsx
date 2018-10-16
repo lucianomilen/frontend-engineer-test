@@ -45,7 +45,7 @@ export default class StockDetail extends React.Component<any> {
                                 {currentStock.companyName} ({currentStock.symbol})
                             </h4>
                             <h1>
-                                {currentStock.latestPrice}&nbsp;
+                                {currentStock.lastSalePrice}&nbsp;
                                 <span className="stock-change-text"
                                       style={currentStock.change < 0 ? negativeText : normalText}>
                                     {currentStock.change}
